@@ -149,10 +149,7 @@ namespace HelloWorld
                         }
                         if (names.Count >= 3)
                         {
-                            Console.WriteLine(names[0] + ", " + names[1] + " and ");
-                            others = names.Count;
-                            others -= 2;
-                            Console.WriteLine(others + " others liked your post");
+                            Console.WriteLine("{0}, {1} and {2} others like your post", names[0], names[1], names.Count - 2);
                         }
                 }
             }
@@ -163,11 +160,15 @@ namespace HelloWorld
             /*
             var array = new Array[1];
             string name;
-            name = Console.ReadLine();// gget info
-            char[] charArr = name.ToCharArray();//string to char
+            name = Console.ReadLine();     
+            
+            char[] charArr = name.ToCharArray();      //string to char
+            
             Array.Reverse(charArr);
-            name = new string(charArr);//char array to string
-            Console.WriteLine(name);
+            
+            name = new string(charArr);              //char array to string
+            
+            Console.WriteLine("Reversed :"name);
             */
             /////////////////////////////////////////////////////////////////////////////////////
             //Write a program and ask the user to enter 5 numbers.
@@ -272,7 +273,6 @@ namespace HelloWorld
             //Write a program and ask the user to supply a list of comma separated numbers(e.g 5, 1, 9, 2, 10).
             //If the list is empty or includes less than 5 numbers, display "Invalid List" and ask the user to re-try;
             //otherwise, display the 3 smallest numbers in the list.
-            
 
 
             var charsToRemove = new string[] { "@", ",", ".", ";", "'" };
@@ -291,70 +291,101 @@ namespace HelloWorld
 
                 //
                 // Burda list in string ten char array a cevrilmesi ve ondan sonra sayıların tek tek arraya atılması gerek.
-                int[] Aint = Array.ConvertAll(charArr, c => (int)Char.GetNumericValue(c));
+                int[] Liste = Array.ConvertAll(charArr, c => (int)Char.GetNumericValue(c));
+                List<int> List = new List<int>(Liste);
                 int i = 0;
                 int small = 0;
                 //integer array declaration
                 int[] arr = new int[5];
 
-                Console.WriteLine("Enter array elements : ");
+                //mine was different after this This more readable :)
 
+                var Smalls = new List<int>();
 
-
-                //assign fist element to the 'small' 
-                //compare it with other array elements
-                small = Aint[0];
-                int firstSmall;
-                int secondSmall;
-                int thirdSmall;
-
-                for (i = 1; i < 5; i++)
+                while (Smalls.Count < 3)
                 {
-                    //compare if small is greater than of any element of the array
-                    //assign that element in it.
-                    if (small > Aint[i])
-                        small = Aint[i];
+                    //assign fist element to the 'small' 
+                    //compare it with other array elements
+                    small = List[0];
+                    foreach (var number in List)
+                    {
+                        if (small > List[i])
+                            small = List[i];
+                    }
+                    Smalls.Add(small);
+                    List.Remove(small);
                 }
-                firstSmall = small;
-                int indexToRemove = Array.IndexOf(Aint, firstSmall);
-                Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
-                small = Aint[0];
+                Smalls.Sort();
+                foreach (var item in Smalls)
+                {
+                    Console.WriteLine("3 smallest numbers : " + item);
+                }
 
-                for (i = 1; i < 4; i++)
-                {
-                    //compare if small is greater than of any element of the array
-                    //assign that element in it.
-                    if (small > Aint[i])
-                        small = Aint[i];
-                }
-                secondSmall = small;
-                indexToRemove = Array.IndexOf(Aint, secondSmall);
-                Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
-                small = Aint[0];
-
-                for (i = 1; i < 3; i++)
-                {
-                    //compare if small is greater than of any element of the array
-                    //assign that element in it.
-                    if (small > Aint[i])
-                        small = Aint[i];
-                }
-                thirdSmall = small;
-                indexToRemove = Array.IndexOf(Aint, thirdSmall);
-                Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
-                small = Aint[0];
-                foreach (var item in Aint)
-                {
-                    Console.WriteLine(" last list elements : " + item);
-                }
-                //finally print the smallest elemeent of the integer array
-                Console.WriteLine("Smallest elements in array are : " + firstSmall + " " + secondSmall + " " + thirdSmall);
             }
             else
             {
                 Console.WriteLine("please enter 5 numbers and in 1 digits please. Also not empty please.");
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+        ///Mine works differantly soo I want to preserve it  
+        /*
+        //assign fist element to the 'small' 
+        //compare it with other array elements
+        small = Aint[0];
+        int firstSmall;
+        int secondSmall;
+        int thirdSmall;
+
+        for (i = 1; i < 5; i++)
+        {
+            //compare if small is greater than of any element of the array
+            //assign that element in it.
+            if (small > Aint[i])
+                small = Aint[i];
+        }
+        firstSmall = small;
+        int indexToRemove = Array.IndexOf(Aint, firstSmall);
+        Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
+        small = Aint[0];
+
+        for (i = 1; i < 4; i++)
+        {
+            //compare if small is greater than of any element of the array
+            //assign that element in it.
+            if (small > Aint[i])
+                small = Aint[i];
+        }
+        secondSmall = small;
+        indexToRemove = Array.IndexOf(Aint, secondSmall);
+        Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
+        small = Aint[0];
+
+        for (i = 1; i < 3; i++)
+        {
+            //compare if small is greater than of any element of the array
+            //assign that element in it.
+            if (small > Aint[i])
+                small = Aint[i];
+        }
+        thirdSmall = small;
+        indexToRemove = Array.IndexOf(Aint, thirdSmall);
+        Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
+        small = Aint[0];
+        foreach (var item in Aint)
+        {
+            Console.WriteLine(" last list elements : " + item);
+        }
+        //finally print the smallest elemeent of the integer array
+        Console.WriteLine("Smallest elements in array are : " + firstSmall + " " + secondSmall + " " + thirdSmall);
+    }
+    else
+    {
+        Console.WriteLine("please enter 5 numbers and in 1 digits please. Also not empty please.");
+    }
+        */
+    
     }
 }
  
