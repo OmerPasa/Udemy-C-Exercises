@@ -274,7 +274,7 @@ namespace HelloWorld
             //If the list is empty or includes less than 5 numbers, display "Invalid List" and ask the user to re-try;
             //otherwise, display the 3 smallest numbers in the list.
 
-
+            /*
             var charsToRemove = new string[] { "@", ",", ".", ";", "'" };
             Console.WriteLine("Please enter 5 numbers separeted with (,) in range of 1-9");
             var list = Console.ReadLine();
@@ -327,65 +327,190 @@ namespace HelloWorld
                 Console.WriteLine("please enter 5 numbers and in 1 digits please. Also not empty please.");
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-        ///Mine works differantly soo I want to preserve it  
-        /*
-        //assign fist element to the 'small' 
-        //compare it with other array elements
-        small = Aint[0];
-        int firstSmall;
-        int secondSmall;
-        int thirdSmall;
-
-        for (i = 1; i < 5; i++)
-        {
-            //compare if small is greater than of any element of the array
-            //assign that element in it.
-            if (small > Aint[i])
-                small = Aint[i];
-        }
-        firstSmall = small;
-        int indexToRemove = Array.IndexOf(Aint, firstSmall);
-        Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
-        small = Aint[0];
-
-        for (i = 1; i < 4; i++)
-        {
-            //compare if small is greater than of any element of the array
-            //assign that element in it.
-            if (small > Aint[i])
-                small = Aint[i];
-        }
-        secondSmall = small;
-        indexToRemove = Array.IndexOf(Aint, secondSmall);
-        Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
-        small = Aint[0];
-
-        for (i = 1; i < 3; i++)
-        {
-            //compare if small is greater than of any element of the array
-            //assign that element in it.
-            if (small > Aint[i])
-                small = Aint[i];
-        }
-        thirdSmall = small;
-        indexToRemove = Array.IndexOf(Aint, thirdSmall);
-        Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
-        small = Aint[0];
-        foreach (var item in Aint)
-        {
-            Console.WriteLine(" last list elements : " + item);
-        }
-        //finally print the smallest elemeent of the integer array
-        Console.WriteLine("Smallest elements in array are : " + firstSmall + " " + secondSmall + " " + thirdSmall);
-    }
-    else
-    {
-        Console.WriteLine("please enter 5 numbers and in 1 digits please. Also not empty please.");
-    }
         */
-    
+            ////////////////////////////////////////////////////////////////////////////////////////
+            ///Mine works differantly soo I want to preserve it  
+            /*
+            //assign fist element to the 'small' 
+            //compare it with other array elements
+            small = Aint[0];
+            int firstSmall;
+            int secondSmall;
+            int thirdSmall;
+
+            for (i = 1; i < 5; i++)
+            {
+                //compare if small is greater than of any element of the array
+                //assign that element in it.
+                if (small > Aint[i])
+                    small = Aint[i];
+            }
+            firstSmall = small;
+            int indexToRemove = Array.IndexOf(Aint, firstSmall);
+            Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
+            small = Aint[0];
+
+            for (i = 1; i < 4; i++)
+            {
+                //compare if small is greater than of any element of the array
+                //assign that element in it.
+                if (small > Aint[i])
+                    small = Aint[i];
+            }
+            secondSmall = small;
+            indexToRemove = Array.IndexOf(Aint, secondSmall);
+            Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
+            small = Aint[0];
+
+            for (i = 1; i < 3; i++)
+            {
+                //compare if small is greater than of any element of the array
+                //assign that element in it.
+                if (small > Aint[i])
+                    small = Aint[i];
+            }
+            thirdSmall = small;
+            indexToRemove = Array.IndexOf(Aint, thirdSmall);
+            Aint = Aint.Where((source, index) => index != indexToRemove).ToArray();
+            small = Aint[0];
+            foreach (var item in Aint)
+            {
+                Console.WriteLine(" last list elements : " + item);
+            }
+            //finally print the smallest elemeent of the integer array
+            Console.WriteLine("Smallest elements in array are : " + firstSmall + " " + secondSmall + " " + thirdSmall);
+        }
+        else
+        {
+            Console.WriteLine("please enter 5 numbers and in 1 digits please. Also not empty please.");
+        }
+            */
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+            ///7/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //STRİNGS AND  STRİNGBUİLDER PART OF THE EXERCİSES
+            //
+            //string to tl format
+            /*
+            string para = String.Format("{0:C2}", 45.50);
+            Console.WriteLine(para);
+            */
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Write a program and ask the user to enter a few numbers separated by a hyphen.
+            //Work out if the numbers are consecutive.
+            //For example, if the input is "5-6-7-8-9" or "20-19-18-17-16", display a message: "Consecutive";
+            //otherwise, display "Not Consecutive".
+
+            //hypen silinmeli
+            //consecutive olup olmadıkları array yada başka bi metodla bulunmalı
+            bool isConsecutive = false;
+            bool isAssemding = false;
+            bool isDesending =  false;
+
+
+            var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
+
+            Console.WriteLine("Please enter number separated with (,) :");
+            string Input = Console.ReadLine();
+
+            foreach (var c in charsToRemove)// these will remove ","
+            {
+                Input = Input.Replace(c, string.Empty);
+            }
+
+
+
+            if (!string.IsNullOrWhiteSpace(Input))
+            {
+
+                Console.WriteLine("input after split :" + Input);
+                var Lenght = Input.Length;
+                for (int i = 0; i < Lenght / 2; i++)// i yi arttırarak başta 1 i sonra 12 yi baz alıyor.
+                {
+
+
+                    // new String containing the starting
+                    // substring of input String
+                    String new_str = Input.Substring(0, i + 1);
+
+                    // converting starting substring into number
+                    int num = int.Parse(new_str);
+
+
+                    // while loop until the new_String is
+                    // smaller than input String
+                    while (new_str.Length < Lenght)
+                    {
+                        Console.WriteLine("new_str(+)nxtnumber :" + new_str);
+
+                        // next number
+                        num++;
+
+                        // concatenate the next number
+                        new_str = new_str + String.Join("", num);
+                    }
+
+
+                    // check if new String becomes equal to
+                    // input String
+                    if (new_str.Equals(Input))
+                    {
+                        Console.WriteLine("IS Consequetive: " + Input + " ," + new_str);
+                        isAssemding = true;
+                    }
+                }
+
+                Lenght = Input.Length;
+                for (int i = 0; i < Lenght / 2; i++)// i yi arttırarak başta 1 i sonra 12 yi baz alıyor.
+                {
+
+
+                    // new String containing the starting
+                    // substring of input String
+                    String new_str = Input.Substring(0, i + 1);
+
+                    // converting starting substring into number
+                    int num = int.Parse(new_str);
+
+
+                    // while loop until the new_String is
+                    // smaller than input String
+                    while (new_str.Length < Lenght)
+                    {
+
+                        // next number
+                        num--;
+                        Console.WriteLine("new_str(-)nxtnumber :" + new_str);
+                        // concatenate the next number
+                        new_str = new_str + String.Join("", num);
+                    }
+
+
+                    // check if new String becomes equal to
+                    // input String
+                    if (new_str.Equals(Input))
+                    {
+                        Console.WriteLine("IS Consequetive: " + Input);
+                        isDesending = true;
+
+                    }
+                    else
+                        Console.WriteLine("NOT Consequetive: " + Input + " ," + new_str);
+                    isConsecutive = false;
+
+                }
+                if (isAssemding || isDesending)
+                {
+                    Console.WriteLine("LastResult : TRUE" );
+                }
+                else
+                {
+                    Console.WriteLine("LastResult : False" );
+                }
+
+            }
+
+        }
     }
 }
  
