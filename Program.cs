@@ -400,9 +400,8 @@ namespace HelloWorld
             //Work out if the numbers are consecutive.
             //For example, if the input is "5-6-7-8-9" or "20-19-18-17-16", display a message: "Consecutive";
             //otherwise, display "Not Consecutive".
-
-            //hypen silinmeli
-            //consecutive olup olmadıkları array yada başka bi metodla bulunmalı
+            /*
+             
             bool isConsecutive = false;
             bool isAssemding = false;
             bool isDesending =  false;
@@ -510,6 +509,46 @@ namespace HelloWorld
 
             }
 
+            */
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+            ///// Write a program and ask the user to enter a few numbers separated by a hyphen.
+            ///If the user simply presses Enter, without supplying an input, exit immediately; 
+            ///otherwise, check to see if there are duplicates. If so, display "Duplicate" on the console
+            ///
+            var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
+
+            bool isAsking = true;
+            while (isAsking)
+            {
+                Console.WriteLine("Please insert numbers. we gonna show duplicate numbers , if you press (enter) algorithm gonna quit application.");
+                var input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    isAsking = false;
+                    break;
+                }
+                else
+                {
+                    foreach (var c in charsToRemove)// these will remove ","
+                    {
+                        input = input.Replace(c, string.Empty);
+                    }
+
+                    if (input.Distinct().Count() == input.Length)
+                    {
+                        Console.WriteLine("CLEAR");
+                    }else
+                        Console.WriteLine("Duplicate exists!");
+
+                }
+
+            }
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///Write a program and ask the user to enter a time value in the 24-hour time format (e.g. 19:00). 
+            ///A valid time should be between 00:00 and 23:59. If the time is valid, display "Ok"; 
+            ///otherwise, display "Invalid Time". If the user doesn't provide any values, consider it as invalid time.
         }
     }
 }
