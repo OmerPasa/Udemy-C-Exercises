@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace HelloWorld
 {
@@ -515,6 +516,7 @@ namespace HelloWorld
             ///If the user simply presses Enter, without supplying an input, exit immediately; 
             ///otherwise, check to see if there are duplicates. If so, display "Duplicate" on the console
             ///
+            /*
             var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
 
             bool isAsking = true;
@@ -544,11 +546,68 @@ namespace HelloWorld
 
             }
 
-
+            */
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter a time value in the 24-hour time format (e.g. 19:00). 
             ///A valid time should be between 00:00 and 23:59. If the time is valid, display "Ok"; 
             ///otherwise, display "Invalid Time". If the user doesn't provide any values, consider it as invalid time.
+            /*
+            Console.WriteLine("please input as 00:00 type .");
+            string text = Console.ReadLine();
+            string format = "HH:mm";
+            CultureInfo invariant = System.Globalization.CultureInfo.InvariantCulture;
+            DateTime dt;
+            if (DateTime.TryParseExact(text, format, invariant, DateTimeStyles.None, out dt))
+            {
+                Console.WriteLine("Valid");
+            }
+            else
+            {
+                // handle the fact you cannot parse the datetime
+                Console.WriteLine("Invalid");
+
+            }
+            */
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///Write a program and ask the user to enter a few words separated by a space.
+            ///Use the words to create a variable name with PascalCase. 
+            ///For example, if the user types: "number of students", display "NumberOfStudents". 
+            ///Make sure that the program is not dependent on the input. 
+            ///So, if the user types "NUMBER OF STUDENTS", the program should still display "NumberOfStudents".
+            ///
+            ///takee input, make all of them lower case,  make evey word an array element then uppercase first char.
+
+            /*
+
+            Console.WriteLine("Please insert few words separeted with space");
+            var input = Console.ReadLine();
+            var LowCase = input.ToLower();
+
+            string firstLetterOfEachWord =
+                    string.Join(" ", LowCase.Split(' ').ToList()
+                            .ConvertAll(word =>
+                                    word.Substring(0, 1).ToUpper() + word.Substring(1)
+                            )
+                    );
+            Console.WriteLine("FirstLetterOfEach word : "+firstLetterOfEachWord);
+            
+            */
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///Write a program and ask the user to enter an English word.
+            ///Count the number of vowels (a, e, o, u, i) in the word.
+            ///So, if the user enters "inadequate", the program should display 6 on the console.
+            ///
+            int Count = 0;
+            string[] sesliler = { "a", "e", "o", "u", "i" };
+            var charSesliler = sesliler.SelectMany(x => x.ToCharArray());
+            string input = Console.ReadLine();
+            
+            foreach (var ses in charSesliler)
+            {
+                Count += input.Count(f => (f == ses));
+            }
+            Console.WriteLine(Count);
         }
     }
 }
