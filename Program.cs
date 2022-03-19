@@ -400,114 +400,8 @@ namespace HelloWorld
             //For example, if the input is "5-6-7-8-9" or "20-19-18-17-16", display a message: "Consecutive";
             //otherwise, display "Not Consecutive".
             /*
-             
-            bool isConsecutive = false;
-            bool isAssemding = false;
-            bool isDesending =  false;
-
-
-            var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
-
-            Console.WriteLine("Please enter number separated with (,) :");
-            string Input = Console.ReadLine();
-
-            foreach (var c in charsToRemove)// these will remove ","
-            {
-                Input = Input.Replace(c, string.Empty);
-            }
-
-
-
-            if (!string.IsNullOrWhiteSpace(Input))
-            {
-
-                Console.WriteLine("input after split :" + Input);
-                var Lenght = Input.Length;
-                for (int i = 0; i < Lenght / 2; i++)// i yi arttırarak başta 1 i sonra 12 yi baz alıyor.
-                {
-
-
-                    // new String containing the starting
-                    // substring of input String
-                    String new_str = Input.Substring(0, i + 1);
-
-                    // converting starting substring into number
-                    int num = int.Parse(new_str);
-
-
-                    // while loop until the new_String is
-                    // smaller than input String
-                    while (new_str.Length < Lenght)
-                    {
-                        Console.WriteLine("new_str(+)nxtnumber :" + new_str);
-
-                        // next number
-                        num++;
-
-                        // concatenate the next number
-                        new_str = new_str + String.Join("", num);
-                    }
-
-
-                    // check if new String becomes equal to
-                    // input String
-                    if (new_str.Equals(Input))
-                    {
-                        Console.WriteLine("IS Consequetive: " + Input + " ," + new_str);
-                        isAssemding = true;
-                    }
-                }
-
-                Lenght = Input.Length;
-                for (int i = 0; i < Lenght / 2; i++)// i yi arttırarak başta 1 i sonra 12 yi baz alıyor.
-                {
-
-
-                    // new String containing the starting
-                    // substring of input String
-                    String new_str = Input.Substring(0, i + 1);
-
-                    // converting starting substring into number
-                    int num = int.Parse(new_str);
-
-
-                    // while loop until the new_String is
-                    // smaller than input String
-                    while (new_str.Length < Lenght)
-                    {
-
-                        // next number
-                        num--;
-                        Console.WriteLine("new_str(-)nxtnumber :" + new_str);
-                        // concatenate the next number
-                        new_str = new_str + String.Join("", num);
-                    }
-
-
-                    // check if new String becomes equal to
-                    // input String
-                    if (new_str.Equals(Input))
-                    {
-                        Console.WriteLine("IS Consequetive: " + Input);
-                        isDesending = true;
-
-                    }
-                    else
-                        Console.WriteLine("NOT Consequetive: " + Input + " ," + new_str);
-                    isConsecutive = false;
-
-                }
-                if (isAssemding || isDesending)
-                {
-                    Console.WriteLine("LastResult : TRUE" );
-                }
-                else
-                {
-                    Console.WriteLine("LastResult : False" );
-                }
-
-            }
-
+            string Input;
+            Console.WriteLine(" \n Your numbers are : " + ConsequetivityChecker(Input = Console.ReadLine()));
             */
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////7
             ///// Write a program and ask the user to enter a few numbers separated by a hyphen.
@@ -552,6 +446,119 @@ namespace HelloWorld
             Console.WriteLine(CountSesliHarf(input = Console.ReadLine()));
             */
         }
+        public static string ConsequetivityChecker(string Input)
+        {
+            bool isConsecutive = false;
+            bool isAssemding = false;
+            bool isDesending = false;
+
+
+            var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
+
+            Console.WriteLine("Please enter number separated with (,) :");
+
+
+            foreach (var c in charsToRemove)// these will remove ","
+            {
+                Input = Input.Replace(c, string.Empty);
+            }
+
+
+
+            if (!string.IsNullOrWhiteSpace(Input))
+            {
+
+                var Lenght = Input.Length;
+                for (int i = 0; i < Lenght / 2; i++)// i yi arttırarak başta 1 i sonra 12 yi baz alıyor.
+                {
+
+
+                    // new String containing the starting
+                    // substring of input String
+                    String new_str = Input.Substring(0, i + 1);
+
+                    // converting starting substring into number
+                    int num = int.Parse(new_str);
+
+
+                    // while loop until the new_String is
+                    // smaller than input String
+                    while (new_str.Length < Lenght)
+                    {
+
+                        // next number
+                        num++;
+
+                        // concatenate the next number
+                        new_str = new_str + String.Join("", num);
+                    }
+
+
+                    // check if new String becomes equal to
+                    // input String
+                    if (new_str.Equals(Input))
+                    {
+                        return "IS Consequetive: " + Input + " ," + new_str;
+                        isAssemding = true;
+                    }
+                }
+
+                Lenght = Input.Length;
+                for (int i = 0; i < Lenght / 2; i++)// i yi arttırarak başta 1 i sonra 12 yi baz alıyor.
+                {
+
+
+                    // new String containing the starting
+                    // substring of input String
+                    String new_str = Input.Substring(0, i + 1);
+
+                    // converting starting substring into number
+                    int num = int.Parse(new_str);
+
+
+                    // while loop until the new_String is
+                    // smaller than input String
+                    while (new_str.Length < Lenght)
+                    {
+
+                        // next number
+                        num--;
+                        // concatenate the next number
+                        new_str = new_str + String.Join("", num);
+                    }
+
+
+                    // check if new String becomes equal to
+                    // input String
+                    if (new_str.Equals(Input))
+                    {
+                        return "IS Consequetive: " + Input;
+                        isDesending = true;
+
+                    }
+                    else
+                        return "NOT Consequetive: " + Input + " ," + new_str ;
+                    isConsecutive = false;
+
+                }
+                if (isAssemding || isDesending)
+                {
+                    return "LastResult : TRUE" ;
+                }
+                else
+                {
+                    return "LastResult : False";
+                }
+
+            }
+            return "It is emtyp sir";
+        }
+
+
+
+
+
+
         public static string DuplicateChecker(string input)
         {
             var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
@@ -577,6 +584,10 @@ namespace HelloWorld
                         return "Duplicate exists!";
                 }
         }
+
+
+
+
         public static string HourCorrectness(string text)
         {
             CultureInfo invariant = System.Globalization.CultureInfo.InvariantCulture;
