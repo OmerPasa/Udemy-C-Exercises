@@ -575,20 +575,12 @@ namespace HelloWorld
             ///
             ///takee input, make all of them lower case,  make evey word an array element then uppercase first char.
 
-            /*
 
-            Console.WriteLine("Please insert few words separeted with space");
-            var input = Console.ReadLine();
-            var LowCase = input.ToLower();
 
-            string firstLetterOfEachWord =
-                    string.Join(" ", LowCase.Split(' ').ToList()
-                            .ConvertAll(word =>
-                                    word.Substring(0, 1).ToUpper() + word.Substring(1)
-                            )
-                    );
-            Console.WriteLine("FirstLetterOfEach word : "+firstLetterOfEachWord);
-            */
+            string firstLetterOfEachWord;
+            Console.WriteLine("FirstLetterOfEach word : " + PascalCase_er(firstLetterOfEachWord = Console.ReadLine()));
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter an English word.
             ///Count the number of vowels (a, e, o, u, i) in the word.
             ///So, if the user enters "inadequate", the program should display 6 on the console.
@@ -597,6 +589,18 @@ namespace HelloWorld
             string input;
             Console.WriteLine(CountSesliHarf(input = Console.ReadLine()));
             */
+        }
+
+        public static string PascalCase_er(string firstLetterOfEachWord)
+        {
+            var LowCase = firstLetterOfEachWord.ToLower();
+            firstLetterOfEachWord =
+                    string.Join(" ", LowCase.Split(' ').ToList()
+                            .ConvertAll(word =>
+                                    word.Substring(0, 1).ToUpper() + word.Substring(1)
+                            )
+                    ).Replace(" ", "");
+            return firstLetterOfEachWord;
         }
 
         public static string CountSesliHarf(string input)
