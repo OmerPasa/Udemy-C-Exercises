@@ -513,47 +513,20 @@ namespace HelloWorld
             ///// Write a program and ask the user to enter a few numbers separated by a hyphen.
             ///If the user simply presses Enter, without supplying an input, exit immediately; 
             ///otherwise, check to see if there are duplicates. If so, display "Duplicate" on the console
-            ///
             /*
-            var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
-
-            bool isAsking = true;
-            while (isAsking)
-            {
-                Console.WriteLine("Please insert numbers. we gonna show duplicate numbers , if you press (enter) algorithm gonna quit application.");
-                var input = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    isAsking = false;
-                    break;
-                }
-                else
-                {
-                    foreach (var c in charsToRemove)// these will remove ","
-                    {
-                        input = input.Replace(c, string.Empty);
-                    }
-
-                    if (input.Distinct().Count() == input.Length)
-                    {
-                        Console.WriteLine("CLEAR");
-                    }else
-                        Console.WriteLine("Duplicate exists!");
-
-                }
-
-            }
-
+            string input;
+            Console.WriteLine(" \n Your numbers are : " + DuplicateChecker(input = Console.ReadLine()));
             */
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter a time value in the 24-hour time format (e.g. 19:00). 
             ///A valid time should be between 00:00 and 23:59. If the time is valid, display "Ok"; 
             ///otherwise, display "Invalid Time". If the user doesn't provide any values, consider it as invalid time.
-            
+            /*
             Console.WriteLine("please input as 00:00 type .");
             string text;
             Console.WriteLine("Your given string is : " + HourCorrectness(text = Console.ReadLine()));
-
+            */
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter a few words separated by a space.
@@ -578,6 +551,31 @@ namespace HelloWorld
             string input;
             Console.WriteLine(CountSesliHarf(input = Console.ReadLine()));
             */
+        }
+        public static string DuplicateChecker(string input)
+        {
+            var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
+
+                Console.WriteLine("Please insert numbers. we gonna show duplicate numbers , if you press (enter) algorithm gonna quit application.");
+                
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return "understood Quitting initiated...";
+                }
+                else
+                {
+                    foreach (var c in charsToRemove)// these will remove ","
+                    {
+                        input = input.Replace(c, string.Empty);
+                    }
+
+                    if (input.Distinct().Count() == input.Length)
+                    {
+                        return "CLEAR";
+                    }
+                    else
+                        return "Duplicate exists!";
+                }
         }
         public static string HourCorrectness(string text)
         {
