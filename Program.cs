@@ -159,9 +159,7 @@ namespace HelloWorld
             //Write a program and ask the user to enter their name. Use an array to reverse the name and
             //then store the result in a new string. Display the reversed name on the console.
             /*
-            var array = new Array[1];
-            string name;
-            name = Console.ReadLine();     
+            var name = Console.ReadLine();     
             
             char[] charArr = name.ToCharArray();      //string to char
             
@@ -169,7 +167,7 @@ namespace HelloWorld
             
             name = new string(charArr);              //char array to string
             
-            Console.WriteLine("Reversed :"name);
+            Console.WriteLine("Reversed :" + name);
             */
             /////////////////////////////////////////////////////////////////////////////////////
             //Write a program and ask the user to enter 5 numbers.
@@ -590,25 +588,32 @@ namespace HelloWorld
                             )
                     );
             Console.WriteLine("FirstLetterOfEach word : "+firstLetterOfEachWord);
-            
             */
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter an English word.
             ///Count the number of vowels (a, e, o, u, i) in the word.
             ///So, if the user enters "inadequate", the program should display 6 on the console.
             ///
-            int Count = 0;
+            /*
+            string input;
+            Console.WriteLine(CountSesliHarf(input = Console.ReadLine()));
+            */
+        }
+
+        public static string CountSesliHarf(string input)
+        {
             string[] sesliler = { "a", "e", "o", "u", "i" };
             var charSesliler = sesliler.SelectMany(x => x.ToCharArray());
-            string input = Console.ReadLine();
-            
+            int Count = 0;
             foreach (var ses in charSesliler)
             {
                 Count += input.Count(f => (f == ses));
             }
-            Console.WriteLine(Count);
+            input = Convert.ToString(Count);
+            return input;
+
         }
+
+
     }
 }
  
