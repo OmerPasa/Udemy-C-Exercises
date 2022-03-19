@@ -549,23 +549,12 @@ namespace HelloWorld
             ///Write a program and ask the user to enter a time value in the 24-hour time format (e.g. 19:00). 
             ///A valid time should be between 00:00 and 23:59. If the time is valid, display "Ok"; 
             ///otherwise, display "Invalid Time". If the user doesn't provide any values, consider it as invalid time.
-            /*
+            
             Console.WriteLine("please input as 00:00 type .");
-            string text = Console.ReadLine();
-            string format = "HH:mm";
-            CultureInfo invariant = System.Globalization.CultureInfo.InvariantCulture;
-            DateTime dt;
-            if (DateTime.TryParseExact(text, format, invariant, DateTimeStyles.None, out dt))
-            {
-                Console.WriteLine("Valid");
-            }
-            else
-            {
-                // handle the fact you cannot parse the datetime
-                Console.WriteLine("Invalid");
+            string text;
+            Console.WriteLine("Your given string is : " + HourCorrectness(text = Console.ReadLine()));
 
-            }
-            */
+
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter a few words separated by a space.
             ///Use the words to create a variable name with PascalCase. 
@@ -575,11 +564,11 @@ namespace HelloWorld
             ///
             ///takee input, make all of them lower case,  make evey word an array element then uppercase first char.
 
-
+            /*
 
             string firstLetterOfEachWord;
             Console.WriteLine("FirstLetterOfEach word : " + PascalCase_er(firstLetterOfEachWord = Console.ReadLine()));
-            
+            */
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Write a program and ask the user to enter an English word.
             ///Count the number of vowels (a, e, o, u, i) in the word.
@@ -589,6 +578,20 @@ namespace HelloWorld
             string input;
             Console.WriteLine(CountSesliHarf(input = Console.ReadLine()));
             */
+        }
+        public static string HourCorrectness(string text)
+        {
+            CultureInfo invariant = System.Globalization.CultureInfo.InvariantCulture;
+            DateTime dt;
+            if (DateTime.TryParseExact(text, "HH:mm", invariant, DateTimeStyles.None, out dt))
+            {
+                return "Valid";
+            }
+            else
+            {
+                // handle the fact you cannot parse the datetime
+                return "Invalid";
+            }
         }
 
         public static string PascalCase_er(string firstLetterOfEachWord)
