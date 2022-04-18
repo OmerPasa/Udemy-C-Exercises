@@ -5,13 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.IO;
 
 namespace HelloWorld
 {
     class Program
     {
+
         static void Main()
         {
+
             /*
             //ondan küçük mü 1 den büyük mü?
               Console.WriteLine("Please enter a number 1-10:");
@@ -445,6 +448,105 @@ namespace HelloWorld
             string input;
             Console.WriteLine(CountSesliHarf(input = Console.ReadLine()));
             */
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///File RELATED CODES
+            /// Just for try
+            /*
+            var files = Directory.GetFiles(@"D:\Belgelerim\Other documents for the your life force comander", "*.*" , SearchOption.AllDirectories);
+            foreach (var item in files)
+            {
+                Console.WriteLine(item);
+            }
+            */
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///Write a program that reads a text file and displays the number of words.
+            /*
+            int wordCount;
+            string whole_text = File.ReadAllText(@"D:\YOUTUBE VİDEOS/NOTLAR.txt");
+            char[] delimiters = new char[] { ' ', '\r', '\n' };
+            wordCount = whole_text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).Length;
+
+            Console.WriteLine("here is your word count: " + wordCount);
+            */
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// Write a program that reads a text file and displays the longest word in the file.
+            /*
+            string whole_text = File.ReadAllText(@"D:\YOUTUBE VİDEOS/NOTLAR.txt");
+            var words = new List<string>(whole_text.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries));
+
+            Console.WriteLine(words.Count);
+            if (words.Count > 0)
+            {
+                int longestIndex = 1;
+                string longestWord = words[0];
+
+                for (int i = 0; i < words.Count; i++)
+                {
+                    string item = words[i];
+                    if (item.Length > longestWord.Length)
+                    {
+                        longestWord = item;
+                        longestIndex = i + 1;
+                    }
+                }
+                Console.WriteLine("Longest Word: {0}\nFound at Position {1}", longestWord, longestIndex);
+            }
+            */
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+            ///Exercise 1: Design a Stopwatch,provide two methods: Start and Stop.We call the start method first, and the stop method next. 
+            ///Duration should be a value in TimeSpan.  
+            ///Display the duration on the console.
+            ///We should also be able to use a stopwatch multiple times.So we may start and stop it and then
+            ///start and stop it again. Make sure the duration value each time is calculated properly.
+            ///We should not be able to start a stopwatch twice in a row (because that may overwrite the initial start time).
+            ///So the class should throw an InvalidOperationException if its started twice.
+            ///make stop and start a seperate method.
+            bool exit = false;
+            DateTime start = default, stop = default;
+            bool running = false;
+
+            while (!exit)
+            {
+                var input = Console.ReadLine();
+                Start(start);
+                if (input.ToLower() == "start" && !running)
+                {
+                    running = true;
+
+
+                }
+                else if (input.ToLower() == "stop")
+                {
+                    running = false;
+                    Stop(stop, start);
+                }
+                else if (input.ToLower() == "exit")
+                {
+                    exit = true;
+                }
+                else if (input.ToLower() == "start" && running)
+                {
+                    throw new InvalidOperationException("You shouldn't start twice.");
+                }
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //THE METHODS RELATED TO THOSE UPWARDS.
+        public static DateTime Start(DateTime start)
+        {
+            start = DateTime.Now;
+            Console.WriteLine(start);
+            return start;
+        }
+        public static TimeSpan Stop(DateTime stop, DateTime start)
+        {
+            stop = DateTime.Now;
+            var duration = start - stop;
+            Console.WriteLine(duration);
+            return duration;
         }
         public static string ConsequetivityChecker(string Input)
         {
@@ -554,11 +656,6 @@ namespace HelloWorld
             return "It is emtyp sir";
         }
 
-
-
-
-
-
         public static string DuplicateChecker(string input)
         {
             var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
@@ -584,9 +681,6 @@ namespace HelloWorld
                         return "Duplicate exists!";
                 }
         }
-
-
-
 
         public static string HourCorrectness(string text)
         {
