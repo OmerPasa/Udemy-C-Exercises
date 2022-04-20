@@ -798,13 +798,13 @@ namespace HelloWorld
             Console.WriteLine(_timerStart);
             return _timerStart;
         }
-        public DateTime SetTimerEnd()
+        public TimeSpan SetTimerEnd()
         {
             _timerEnd = DateTime.Now;
             var duration = _timerEnd - _timerStart;
-            Console.WriteLine("Total duration : "+ duration);
             Console.WriteLine(_timerEnd);
-            return _timerEnd;
+            Console.WriteLine("Total duration : " + duration);
+            return duration;
         }
     }
 }
