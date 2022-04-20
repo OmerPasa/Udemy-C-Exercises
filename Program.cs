@@ -503,7 +503,7 @@ namespace HelloWorld
             ///We should not be able to start a stopwatch twice in a row (because that may overwrite the initial start time).
             ///So the class should throw an InvalidOperationException if its started twice.
             ///make stop and start a seperate method.
-            
+            /*
             bool exit = false;
             DateTime start = default, stop = default;
             string testString = "Test";
@@ -516,12 +516,16 @@ namespace HelloWorld
                 if (input.ToLower() == "start" && !running)
                 {
                     running = true;
-                    start = Start(start);
+                    start = DateTime.Now;
+                    Console.WriteLine(start);
                 }
                 else if (input.ToLower() == "stop")
                 {
                     running = false;
-                    Stop(stop, start);
+                    stop = DateTime.Now;
+                    Console.WriteLine(stop);
+                    var duration = start - stop;
+                    Console.WriteLine(duration);
                 }
                 else if (input.ToLower() == "exit")
                 {
@@ -532,7 +536,39 @@ namespace HelloWorld
                     throw new InvalidOperationException("You shouldn't start twice.");
                 }
             }
-            
+                */
+
+            // I will try same thing with methods usign get set properties
+            var Watch = new Watch();
+            bool exit = false;
+            bool running = false;
+
+            while (!exit)
+            {
+                string input = Console.ReadLine();
+
+                if (input.ToLower() == "start" && !running)
+                {
+                    running = true;
+                    Watch.SetTimerStart();
+
+                }
+                else if (input.ToLower() == "stop")
+                {
+                    running = false;
+                    Watch.SetTimerEnd();
+                }
+                else if (input.ToLower() == "exit")
+                {
+                    exit = true;
+                }
+                else if (input.ToLower() == "start" && running)
+                {
+                    throw new InvalidOperationException("You shouldn't start twice.");
+                }
+            }
+
+
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Design a class called Post. This class models a StackOverflow post. It should have properties for title, 
@@ -569,22 +605,9 @@ namespace HelloWorld
 
         }
 
-        public static  string WriteThePost(string dislike , string like , string title ,string description)
+        public static string WriteThePost(string dislike , string like , string title ,string description)
         {
             return dislike;
-        }
-        public static DateTime Start(DateTime start)
-        {
-            start = DateTime.Now;
-            Console.WriteLine(start);
-            return start;
-        }
-        public static TimeSpan Stop(DateTime stop, DateTime start)
-        {
-            stop = DateTime.Now;
-            var duration = start - stop;
-            Console.WriteLine(duration);
-            return duration;
         }
         public static string ConsequetivityChecker(string Input)
         {
@@ -762,6 +785,27 @@ namespace HelloWorld
         }
 
 
+    }
+
+    public class Watch
+    {
+        private DateTime _timerStart;
+        private DateTime _timerEnd;
+
+        public DateTime SetTimerStart()
+        {
+            _timerStart = DateTime.Now;
+            Console.WriteLine(_timerStart);
+            return _timerStart;
+        }
+        public DateTime SetTimerEnd()
+        {
+            _timerEnd = DateTime.Now;
+            var duration = _timerEnd - _timerStart;
+            Console.WriteLine("Total duration : "+ duration);
+            Console.WriteLine(_timerEnd);
+            return _timerEnd;
+        }
     }
 }
  
