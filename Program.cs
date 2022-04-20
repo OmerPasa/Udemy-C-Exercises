@@ -9,7 +9,7 @@ using System.IO;
 
 namespace HelloWorld
 {
-    class Program
+    public class Program
     {
 
         static void Main()
@@ -503,19 +503,20 @@ namespace HelloWorld
             ///We should not be able to start a stopwatch twice in a row (because that may overwrite the initial start time).
             ///So the class should throw an InvalidOperationException if its started twice.
             ///make stop and start a seperate method.
+            
             bool exit = false;
             DateTime start = default, stop = default;
+            string testString = "Test";
             bool running = false;
 
             while (!exit)
             {
-                var input = Console.ReadLine();
-                Start(start);
+                string input = Console.ReadLine();
+
                 if (input.ToLower() == "start" && !running)
                 {
                     running = true;
-
-
+                    start = Start(start);
                 }
                 else if (input.ToLower() == "stop")
                 {
@@ -531,10 +532,47 @@ namespace HelloWorld
                     throw new InvalidOperationException("You shouldn't start twice.");
                 }
             }
+            
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///Design a class called Post. This class models a StackOverflow post. It should have properties for title, 
+            ///description and the date / time it was created.We should be able to up - vote or down - vote a post.
+            ///We should also be able to see the current vote value.In the main method, create a post,up - vote and down - vote 
+            ///it a few times and then display the the current vote value. 
+            ///In this exercise, you will learn that a StackOverflow post should provide methods for up - voting and down - voting.
+            ///You should not give the ability to set the Vote property from the outside, because otherwise, you may accidentally change the votes 
+            ///of a class to 0 or to a random number.And this is how we create bugs in our programs. 
+            ///The class should always protect its state and hide its implementation detail.
+
+            //Post 
+            ///rate 2dislikes   0 likes
+            ///to vote up write like  or dislike to dislike
+            ///title 
+            ///description
+            ///
+            ///all of those should be from methods.
+
+            //var input = Console.ReadLine();
+
+            //if (input.ToLower() == "dislike")
+            //{
+            //    DislikeClicked();
+            //}
+
+            //WriteThePost();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //THE METHODS RELATED TO THOSE UPWARDS.
+        public static void DislikeClicked()
+        {
+
+        }
+
+        public static  string WriteThePost(string dislike , string like , string title ,string description)
+        {
+            return dislike;
+        }
         public static DateTime Start(DateTime start)
         {
             start = DateTime.Now;
