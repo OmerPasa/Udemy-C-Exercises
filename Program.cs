@@ -536,9 +536,12 @@ namespace HelloWorld
                     throw new InvalidOperationException("You shouldn't start twice.");
                 }
             }
-                */
+                
 
-            // I will try same thing with methods usign get set properties
+            /// I will try same thing with methods usign get set properties  
+            /// first try  was a bit in need of ref so we change ways
+
+
             var Watch = new Watch();
             bool exit = false;
             bool running = false;
@@ -568,7 +571,7 @@ namespace HelloWorld
                 }
             }
 
-
+            */
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             ///Design a class called Post. This class models a StackOverflow post. It should have properties for title, 
@@ -587,15 +590,32 @@ namespace HelloWorld
             ///description
             ///
             ///all of those should be from methods.
+            ///
+            var StackOverFlowPost = new StackOverFlowPost();
+            bool exit = false;
+            while (!exit)
+            {
+                var input = Console.ReadLine();
 
-            //var input = Console.ReadLine();
+                if (input.ToLower() == "dislike")
+                {
+                    StackOverFlowPost.Dislike();
+                }
+                else if (input.ToLower() == "like")
+                {
+                    StackOverFlowPost.Like();
+                }
+                else if (input.ToLower() == "post")
+                {
+                    StackOverFlowPost.Post();
+                }
+                else if (input.ToLower() == "exit")
+                {
+                    exit = true;
+                }
 
-            //if (input.ToLower() == "dislike")
-            //{
-            //    DislikeClicked();
-            //}
-
-            //WriteThePost();
+            }
+            
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -807,5 +827,62 @@ namespace HelloWorld
             return duration;
         }
     }
+    public class StackOverFlowPost
+    {
+        private int _likes { get; set; }
+
+        public int Dislike()
+        {
+            _likes -= 1;
+            return _likes;
+        }
+        public int Like()
+        {
+            _likes += 1;
+            return _likes;
+        }
+        public int Post()
+        {
+            Console.WriteLine("Rates  Total Like&Dislike Ratio  " +_likes);
+            Console.WriteLine("\n  Title : wefaofıwjfeaoıfejweı \n Description :awoıefajwoefıjf");
+            return _likes;
+        }
+    }
+
+    class Stack
+    {
+        /// <summary>
+        /// The Push() method stores the given object on top of the stack. 
+        /// We use the “object” type here so 
+        // we can store any objects inside the stack.Remember the “object” class is the base of all classes 
+        //in the.NET Framework.So any types can be automatically upcast to the object. Make sure to
+        //take into account the scenario that null is passed to this object. We should not store null 
+        //references in the stack. So if null is passed to this method, you should throw an
+        //InvalidOperationException. 
+        /// </summary>
+        void Push(Object obj)
+        {
+            
+        }
+        /// <summary>
+        /// The Pop() method removes the object on top of the stack and returns it. 
+        /// Make sure to take into account the scenario that we call the Pop() method on an empty stack. 
+        /// In this case, this method should throw an InvalidOperationException. 
+        /// </summary>
+        /// <returns></returns>
+        object Pop()
+        {
+            return;
+        }
+
+        /// <summary>
+        /// The Clear() method removes all objects from the stack.
+        /// </summary>
+        void Clear()
+        {
+
+        }
+    }
+
 }
  
