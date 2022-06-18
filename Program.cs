@@ -1,6 +1,7 @@
 ﻿using hello_world;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -590,7 +591,7 @@ namespace HelloWorld
             ///description
             ///
             ///all of those should be from methods.
-            ///
+            /*
             var StackOverFlowPost = new StackOverFlowPost();
             bool exit = false;
             while (!exit)
@@ -615,9 +616,71 @@ namespace HelloWorld
                 }
 
             }
-            
+            */
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            ///design a stack
+            ///
+            var Stack = new Stackk();
+            Stack.Stack_items(10);
+            bool exit = false;
+            while (!exit)
+            {
+                try
+                {
+                    var input = Console.ReadLine();
+                    if (input == null || input == "0" || input == "" || input == " ")
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    else if (input.ToLower() == "pop")
+                    {
+                        Stack.Pop();
+                    }
+                    else if (input.ToLower() == "clear")
+                    {
+                        Stack.Clear();
+                    }
+                    else if (input.ToLower() == "printstack")
+                    {
+                        Stack.printStack();
+                    }
+                    else if (input.ToLower() == "test")
+                    {
+                        Stack.Push(1);
+                        Stack.Push(2);
+                        Stack.Push(3);
+                        Console.WriteLine(Stack.Pop());
+                        Console.WriteLine(Stack.Pop());
+                        Console.WriteLine(Stack.Pop());
+                    }
+                    else if (input.ToLower() == "exit")
+                    {
+                        exit = true;
+                    }
+                    else
+                    {
+                        Stack.Push(input);
+                    }
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine("please don't insert null values!");
+                    continue;
+                }
+                
+
+                
+            }
         }
 
+
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //THE METHODS RELATED TO THOSE UPWARDS.
         public static void DislikeClicked()
@@ -849,38 +912,85 @@ namespace HelloWorld
         }
     }
 
-    class Stack
+
+    public class Stackk
     {
+        private object[] ele;
+        private int top;
+        private int max;
+
+        public void Stack_items(int size)
+        {
+            ele = new object[size]; // Maximum size of Stack
+            top = -1;
+            max = size;
+        }
         /// <summary>
         /// The Push() method stores the given object on top of the stack. 
         /// We use the “object” type here so 
-        // we can store any objects inside the stack.Remember the “object” class is the base of all classes 
+        // we can store any objects inside the stack .Remember the “object” class is the base of all classes 
         //in the.NET Framework.So any types can be automatically upcast to the object. Make sure to
         //take into account the scenario that null is passed to this object. We should not store null 
         //references in the stack. So if null is passed to this method, you should throw an
         //InvalidOperationException. 
         /// </summary>
-        void Push(Object obj)
+        public void Push(object item)
         {
-            
+            if (top == max - 1)
+            {
+                Console.WriteLine("Stack Overflow");
+                return;
+            }
+            else
+            {
+                ele[++top] = item;
+            }
         }
+
+
         /// <summary>
         /// The Pop() method removes the object on top of the stack and returns it. 
         /// Make sure to take into account the scenario that we call the Pop() method on an empty stack. 
         /// In this case, this method should throw an InvalidOperationException. 
         /// </summary>
         /// <returns></returns>
-        object Pop()
+        public object Pop()
         {
-            return;
+            if (top == -1)
+            {
+                Console.WriteLine("Stack is Empty");
+                return -1;
+            }
+            else
+            {
+                Console.WriteLine("{0} popped from stack ", ele[top]);
+                return ele[top--];
+            }
         }
 
         /// <summary>
         /// The Clear() method removes all objects from the stack.
         /// </summary>
-        void Clear()
+        public void Clear()
         {
+        Array.Clear(ele);
+        }
 
+
+        public void printStack()
+        {
+            if (top == -1)
+            {
+                Console.WriteLine("Stack is Empty");
+                return;
+            }
+            else// may be unnecesrayy 
+            {
+                for (int i = 0; i <= top; i++)
+                {
+                    Console.WriteLine("{0} pushed into stack", ele[i]);
+                }
+            }
         }
     }
 
