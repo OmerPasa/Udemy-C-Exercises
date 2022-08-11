@@ -619,10 +619,11 @@ namespace HelloWorld
             */
             //////////////////////////////////////////////////////////////////////////////////////////////
             ///design a stack
-            ///
+            /*
             var Stack = new Stackk();
             Stack.Stack_items(10);
             bool exit = false;
+            Console.WriteLine("Please just write what you want to push . ");
             while (!exit)
             {
                 try
@@ -660,20 +661,71 @@ namespace HelloWorld
                     else
                     {
                         Stack.Push(input);
-                    }
+                    }   
                 }
                 catch (InvalidOperationException e)
                 {
                     Console.WriteLine("please don't insert null values!");
                     continue;
                 }
-                
-
-                
             }
+            */
+
+
+
         }
 
+        /// <summary>
+        /// NEW CLASSES
+        /// </summary>
 
+        class Dbconnection 
+        {
+            string ConnectionString;
+            TimeSpan Timeout;
+            Boolean ServerStatus;
+
+            public  Dbconnection(string connectionString, TimeSpan timeout, bool serverStatus)
+            {
+                bool exit = false;
+                Console.WriteLine("Please just write what you want to connect , ex. sqlconnect / azureconnect . ");
+                while (!exit)
+                {
+                    try
+                    {
+                        var input = Console.ReadLine();
+                        if (input == null || input == "0" || input == "" || input == " ")
+                        {
+                            throw new InvalidOperationException();
+                        }
+                        else if (input.ToLower() == "sqlconnect")
+                        {
+                            //Call.sqlconnect
+                        }
+                        else if (input.ToLower() == "azureconnect")
+                        {
+                            //Call.azureconnect
+                        }
+                        else if (input.ToLower() == "exit")
+                        {
+                            exit = true;
+                        }
+                        else
+                        {
+                            // add a timer?
+                        }
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        Console.WriteLine("please don't insert null values!");
+                        continue;
+                    }
+
+                    ConnectionString = connectionString;
+                Timeout = timeout;
+                ServerStatus = serverStatus;
+            }   
+        }
 
 
 
