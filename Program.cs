@@ -679,13 +679,14 @@ namespace HelloWorld
         /// NEW CLASSES
         /// </summary>
 
-        class Dbconnection 
+        public abstract class Dbconnection 
         {
+            public abstract void ServerStatus(bool ServerStatus);
+
+
             string ConnectionString;
             TimeSpan Timeout;
-            Boolean ServerStatus;
-
-            public  Dbconnection(string connectionString, TimeSpan timeout, bool serverStatus)
+            public  Dbconnection(string connectionString, TimeSpan timeout)
             {
                 bool exit = false;
                 Console.WriteLine("Please just write what you want to connect , ex. sqlconnect / azureconnect . ");
@@ -721,21 +722,31 @@ namespace HelloWorld
                         continue;
                     }
 
-                    ConnectionString = connectionString;
+                ConnectionString = connectionString;
                 Timeout = timeout;
-                ServerStatus = serverStatus;
             }   
         }
 
+            public class Sqlconnect : Dbconnection
+            {
+                public override ServerStatus (bool ServerStatus)
+                {
+
+                }
+                public Sqlconnect(string connectionString, TimeSpan timeout) : base(connectionString, timeout)
+                {
+                }
+            }
 
 
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //THE METHODS RELATED TO THOSE UPWARDS.
-        public static void DislikeClicked()
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //THE METHODS RELATED TO THOSE UPWARDS.
+            public static void DislikeClicked()
         {
 
         }
