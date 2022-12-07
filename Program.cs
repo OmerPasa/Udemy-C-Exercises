@@ -853,7 +853,51 @@ namespace HelloWorld
             }
             return "It is emtyp sir";
         }
+        // These are exercise for interface activity.
+        public interface IActivity
+        {
+            void Execute();
+        }
 
+        public class FirstActivity : IActivity
+        {
+            public void Execute()
+            {
+                Console.WriteLine("Starting the activity.1");
+            }
+        }
+
+        public class SecondActivity : IActivity
+        {
+            public void Execute()
+            {
+                Console.WriteLine("Starting the activity.2");
+            }
+        }
+        public class Workflow
+        {
+            public List<IActivity> Activities { get; }
+
+            public Workflow(List<IActivity> activities)
+            {
+                Activities = activities;
+            }
+        }
+
+
+        public class WorkflowEngine
+        {
+            public void Run(Workflow workflow)
+            {
+                foreach (var activity in workflow.Activities)
+                {
+                    if (activity == null)
+                        throw new ArgumentException("Activities cannot be null.");
+
+                    activity.Execute();
+                }
+            }
+        }
         public static string DuplicateChecker(string input)
         {
             var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
