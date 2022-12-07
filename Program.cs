@@ -1,4 +1,4 @@
-﻿using hello_world;
+﻿using HelloWorld;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.IO;
+using static HelloWorld.Program;
+using System.Diagnostics;
+using static HelloWorld.Program.Dbconnection;
+using System.Threading;
 
 namespace HelloWorld
 {
@@ -618,12 +622,13 @@ namespace HelloWorld
             }
             */
             //////////////////////////////////////////////////////////////////////////////////////////////
-            ///design a stack
+            ///design a stack that takes numbers and stacks them to a stack and play with them .
+            ///pop them clear them check whether null values entered or not
             /*
             var Stack = new Stackk();
             Stack.Stack_items(10);
             bool exit = false;
-            Console.WriteLine("Please just write what you want to push . ");
+            Console.WriteLine("Please just write what you want to push . input numbers .(pop) to pop ,(clear) to clear ,(print) to print the stack, (test) to test the code,(exit) to exit the application ");
             while (!exit)
             {
                 try
@@ -641,7 +646,7 @@ namespace HelloWorld
                     {
                         Stack.Clear();
                     }
-                    else if (input.ToLower() == "printstack")
+                    else if (input.ToLower() == "printstack" || input.ToLower() == "print")
                     {
                         Stack.printStack();
                     }
@@ -661,7 +666,51 @@ namespace HelloWorld
                     else
                     {
                         Stack.Push(input);
-                    }   
+                    }
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine("please don't insert null values!");
+                    continue;
+                }
+            }
+            */
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            ///desgin a dbconnection between classes and over ride the methods. Using Abstract classes.
+            //
+            /*
+            bool exit = false;
+            string ConnectionString =default;
+            TimeSpan Timeout = default;
+            Console.WriteLine("Please just write what you want to connect , ex. sqlconnect / azureconnect . ");
+            while (!exit)
+            {
+                try
+                {
+                    var input = Console.ReadLine();
+                    if (input == null || input == "0" || input == "" || input == " ")
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    else if (input.ToLower() == "sqlconnect")
+                    {
+                        Sqlconnect sqlconnect = new Sqlconnect(ConnectionString, Timeout);
+                        sqlconnect.ServerOpen(input, TimeSpan.FromSeconds(15));
+
+                    }
+                    else if (input.ToLower() == "azureconnect")
+                    {
+                        Azureconnect azureconnect = new Azureconnect(ConnectionString, Timeout);
+                        azureconnect.ServerOpen(input, TimeSpan.FromSeconds(15));
+                    }
+                    else if (input.ToLower() == "exit")
+                    {
+                        exit = true;
+                    }
+                    else
+                    {
+                        // add a timer?
+                    }
                 }
                 catch (InvalidOperationException e)
                 {
@@ -671,87 +720,29 @@ namespace HelloWorld
             }
             */
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+
+
+
+
+
+
 
 
         }
 
-        /// <summary>
-        /// NEW CLASSES
-        /// </summary>
-
-        public abstract class Dbconnection 
-        {
-            public abstract void ServerStatus(bool ServerStatus);
-
-
-            string ConnectionString;
-            TimeSpan Timeout;
-            public  Dbconnection(string connectionString, TimeSpan timeout)
-            {
-                bool exit = false;
-                Console.WriteLine("Please just write what you want to connect , ex. sqlconnect / azureconnect . ");
-                while (!exit)
-                {
-                    try
-                    {
-                        var input = Console.ReadLine();
-                        if (input == null || input == "0" || input == "" || input == " ")
-                        {
-                            throw new InvalidOperationException();
-                        }
-                        else if (input.ToLower() == "sqlconnect")
-                        {
-                            //Call.sqlconnect
-                        }
-                        else if (input.ToLower() == "azureconnect")
-                        {
-                            //Call.azureconnect
-                        }
-                        else if (input.ToLower() == "exit")
-                        {
-                            exit = true;
-                        }
-                        else
-                        {
-                            // add a timer?
-                        }
-                    }
-                    catch (InvalidOperationException e)
-                    {
-                        Console.WriteLine("please don't insert null values!");
-                        continue;
-                    }
-
-                ConnectionString = connectionString;
-                Timeout = timeout;
-            }   
-        }
-
-            public class Sqlconnect : Dbconnection
-            {
-                public override ServerStatus (bool ServerStatus)
-                {
-
-                }
-                public Sqlconnect(string connectionString, TimeSpan timeout) : base(connectionString, timeout)
-                {
-                }
-            }
-
-
-
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //THE METHODS RELATED TO THOSE UPWARDS.
-            public static void DislikeClicked()
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //THE METHODS RELATED TO THOSE UPWARDS.
+        public static void DislikeClicked()
         {
 
         }
 
-        public static string WriteThePost(string dislike , string like , string title ,string description)
+        public static string WriteThePost(string dislike, string like, string title, string description)
         {
             return dislike;
         }
@@ -846,13 +837,13 @@ namespace HelloWorld
 
                     }
                     else
-                        return "NOT Consequetive: " + Input + " ," + new_str ;
+                        return "NOT Consequetive: " + Input + " ," + new_str;
                     isConsecutive = false;
 
                 }
                 if (isAssemding || isDesending)
                 {
-                    return "LastResult : TRUE" ;
+                    return "LastResult : TRUE";
                 }
                 else
                 {
@@ -867,26 +858,26 @@ namespace HelloWorld
         {
             var charsToRemove = new string[] { "@", ",", ".", ";", "'", " " };
 
-                Console.WriteLine("Please insert numbers. we gonna show duplicate numbers , if you press (enter) algorithm gonna quit application.");
-                
-                if (string.IsNullOrWhiteSpace(input))
+            Console.WriteLine("Please insert numbers. we gonna show duplicate numbers , if you press (enter) algorithm gonna quit application.");
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return "understood Quitting initiated...";
+            }
+            else
+            {
+                foreach (var c in charsToRemove)// these will remove ","
                 {
-                    return "understood Quitting initiated...";
+                    input = input.Replace(c, string.Empty);
+                }
+
+                if (input.Distinct().Count() == input.Length)
+                {
+                    return "CLEAR";
                 }
                 else
-                {
-                    foreach (var c in charsToRemove)// these will remove ","
-                    {
-                        input = input.Replace(c, string.Empty);
-                    }
-
-                    if (input.Distinct().Count() == input.Length)
-                    {
-                        return "CLEAR";
-                    }
-                    else
-                        return "Duplicate exists!";
-                }
+                    return "Duplicate exists!";
+            }
         }
 
         public static string HourCorrectness(string text)
@@ -931,131 +922,223 @@ namespace HelloWorld
         }
 
 
-    }
-
-    public class Watch
-    {
-        private DateTime _timerStart;
-        private DateTime _timerEnd;
-
-        public DateTime SetTimerStart()
-        {
-            _timerStart = DateTime.Now;
-            Console.WriteLine(_timerStart);
-            return _timerStart;
-        }
-        public TimeSpan SetTimerEnd()
-        {
-            _timerEnd = DateTime.Now;
-            var duration = _timerEnd - _timerStart;
-            Console.WriteLine(_timerEnd);
-            Console.WriteLine("Total duration : " + duration);
-            return duration;
-        }
-    }
-    public class StackOverFlowPost
-    {
-        private int _likes { get; set; }
-
-        public int Dislike()
-        {
-            _likes -= 1;
-            return _likes;
-        }
-        public int Like()
-        {
-            _likes += 1;
-            return _likes;
-        }
-        public int Post()
-        {
-            Console.WriteLine("Rates  Total Like&Dislike Ratio  " +_likes);
-            Console.WriteLine("\n  Title : wefaofıwjfeaoıfejweı \n Description :awoıefajwoefıjf");
-            return _likes;
-        }
-    }
-
-
-    public class Stackk
-    {
-        private object[] ele;
-        private int top;
-        private int max;
-
-        public void Stack_items(int size)
-        {
-            ele = new object[size]; // Maximum size of Stack
-            top = -1;
-            max = size;
-        }
         /// <summary>
-        /// The Push() method stores the given object on top of the stack. 
-        /// We use the “object” type here so 
-        // we can store any objects inside the stack .Remember the “object” class is the base of all classes 
-        //in the.NET Framework.So any types can be automatically upcast to the object. Make sure to
-        //take into account the scenario that null is passed to this object. We should not store null 
-        //references in the stack. So if null is passed to this method, you should throw an
-        //InvalidOperationException. 
+        /// NEW CLASSES
         /// </summary>
-        public void Push(object item)
+
+        public abstract class Dbconnection
         {
-            if (top == max - 1)
+            public abstract void ServerOpen(string ServerKey, TimeSpan timeout);
+            public abstract void ServerClose();
+
+            string ConnectionString;
+            TimeSpan Timeout;
+
+            public Dbconnection(string connectionString, TimeSpan timeout)
             {
-                Console.WriteLine("Stack Overflow");
-                return;
+                ConnectionString = connectionString;
+                Timeout = timeout;
+
             }
-            else
-            {
-                ele[++top] = item;
-            }
-        }
 
 
-        /// <summary>
-        /// The Pop() method removes the object on top of the stack and returns it. 
-        /// Make sure to take into account the scenario that we call the Pop() method on an empty stack. 
-        /// In this case, this method should throw an InvalidOperationException. 
-        /// </summary>
-        /// <returns></returns>
-        public object Pop()
-        {
-            if (top == -1)
+            public class Sqlconnect : Dbconnection
             {
-                Console.WriteLine("Stack is Empty");
-                return -1;
-            }
-            else
-            {
-                Console.WriteLine("{0} popped from stack ", ele[top]);
-                return ele[top--];
-            }
-        }
 
-        /// <summary>
-        /// The Clear() method removes all objects from the stack.
-        /// </summary>
-        public void Clear()
-        {
-        Array.Clear(ele);
-        }
-
-
-        public void printStack()
-        {
-            if (top == -1)
-            {
-                Console.WriteLine("Stack is Empty");
-                return;
-            }
-            else// may be unnecesrayy 
-            {
-                for (int i = 0; i <= top; i++)
+                public Sqlconnect(string connectionString, TimeSpan timeout) : base(connectionString, timeout)
                 {
-                    Console.WriteLine("{0} pushed into stack", ele[i]);
+
+                }
+
+                public override void ServerOpen(string ServerKey, TimeSpan timeout)
+                {
+                    Console.WriteLine("enterence key is " + ServerKey);
+                    Console.WriteLine("SQL Connection Starting...");
+                    Console.WriteLine("Server connection successfull.. starting timer");
+                    Stopwatch sw = Stopwatch.StartNew();
+
+                    while (sw.Elapsed < timeout)
+                    {
+                        timeout = timeout.Subtract(TimeSpan.FromSeconds(1));
+                        Console.WriteLine("Server Running");
+                    }
+                    Console.WriteLine("timeout");
+                    Sqlconnect sqlconnect = new Sqlconnect(ConnectionString, timeout);
+                    sqlconnect.ServerClose();
+                }
+
+                public override void ServerClose()
+                {
+                    Console.WriteLine("Server Connection closing...");
+                }
+
+            }
+
+            public class Azureconnect : Dbconnection
+            {
+                public Azureconnect(string connectionString, TimeSpan timeout) : base(connectionString, timeout)
+                {
+                }
+
+                public override void ServerOpen(string ServerKey, TimeSpan timeout)
+                {
+                    Console.WriteLine("enterence key is " + ServerKey);
+                    Console.WriteLine("SQL Connection Starting...");
+                    Console.WriteLine("Server connection successfull.. starting timer");
+                    Stopwatch sw = Stopwatch.StartNew();
+
+                    while (sw.Elapsed < timeout)
+                    {
+                        timeout = timeout.Subtract(TimeSpan.FromSeconds(1));
+                        Console.WriteLine("Server Running");
+                    }
+                    Console.WriteLine("timeout");
+                    Azureconnect azureconnect = new Azureconnect(ConnectionString, timeout);
+                    azureconnect.ServerClose();
+                }
+
+                public override void ServerClose()
+                {
+                    Console.WriteLine("Server Connection closing...");
+                }
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+        public class Watch
+        {
+            private DateTime _timerStart;
+            private DateTime _timerEnd;
+
+            public DateTime SetTimerStart()
+            {
+                _timerStart = DateTime.Now;
+                Console.WriteLine(_timerStart);
+                return _timerStart;
+            }
+            public TimeSpan SetTimerEnd()
+            {
+                _timerEnd = DateTime.Now;
+                var duration = _timerEnd - _timerStart;
+                Console.WriteLine(_timerEnd);
+                Console.WriteLine("Total duration : " + duration);
+                return duration;
+            }
+        }
+        public class StackOverFlowPost
+        {
+            private int _likes { get; set; }
+
+            public int Dislike()
+            {
+                _likes -= 1;
+                return _likes;
+            }
+            public int Like()
+            {
+                _likes += 1;
+                return _likes;
+            }
+            public int Post()
+            {
+                Console.WriteLine("Rates  Total Like&Dislike Ratio  " + _likes);
+                Console.WriteLine("\n  Title : wefaofıwjfeaoıfejweı \n Description :awoıefajwoefıjf");
+                return _likes;
+            }
+        }
+
+
+        public class Stackk
+        {
+            private object[] ele;
+            private int top;
+            private int max;
+
+            public void Stack_items(int size)
+            {
+                ele = new object[size]; // Maximum size of Stack
+                top = -1;
+                max = size;
+            }
+            /// <summary>
+            /// The Push() method stores the given object on top of the stack. 
+            /// We use the “object” type here so 
+            // we can store any objects inside the stack .Remember the “object” class is the base of all classes 
+            //in the.NET Framework.So any types can be automatically upcast to the object. Make sure to
+            //take into account the scenario that null is passed to this object. We should not store null 
+            //references in the stack. So if null is passed to this method, you should throw an
+            //InvalidOperationException. 
+            /// </summary>
+            public void Push(object item)
+            {
+                if (top == max - 1)
+                {
+                    Console.WriteLine("Stack Overflow");
+                    return;
+                }
+                else
+                {
+                    ele[++top] = item;
+                }
+            }
+
+
+            /// <summary>
+            /// The Pop() method removes the object on top of the stack and returns it. 
+            /// Make sure to take into account the scenario that we call the Pop() method on an empty stack. 
+            /// In this case, this method should throw an InvalidOperationException. 
+            /// </summary>
+            /// <returns></returns>
+            public object Pop()
+            {
+                if (top == -1)
+                {
+                    Console.WriteLine("Stack is Empty");
+                    return -1;
+                }
+                else
+                {
+                    Console.WriteLine("{0} popped from stack ", ele[top]);
+                    return ele[top--];
+                }
+            }
+
+            /// <summary>
+            /// The Clear() method removes all objects from the stack.
+            /// </summary>
+            public void Clear()
+            {
+                Array.Clear(ele);
+            }
+
+
+            public void printStack()
+            {
+                if (top == -1)
+                {
+                    Console.WriteLine("Stack is Empty");
+                    return;
+                }
+                else// may be unnecesrayy 
+                {
+                    for (int i = 0; i <= top; i++)
+                    {
+                        Console.WriteLine("{0} pushed into stack", ele[i]);
+                    }
                 }
             }
         }
     }
-
 }
- 

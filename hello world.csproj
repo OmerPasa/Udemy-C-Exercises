@@ -6,6 +6,14 @@
     <RootNamespace>hello_world</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>HelloWorld.Program</StartupObject>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <ApplicationIcon />
+    <Win32Resource />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>obj\Debug\</OutputPath>
   </PropertyGroup>
 
 </Project>
