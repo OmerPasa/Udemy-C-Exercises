@@ -6,7 +6,7 @@
     <RootNamespace>hello_world</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>HelloWorld.Program</StartupObject>
+    <StartupObject></StartupObject>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <ApplicationIcon />
     <Win32Resource />

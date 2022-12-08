@@ -1,18 +1,7 @@
-﻿using HelloWorld;
-using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using static HelloWorld.Program;
-using System.Diagnostics;
-using static HelloWorld.Program.Dbconnection;
-using System.Threading;
 
-namespace HelloWorld
+namespace hello_world
 {
     public class Program
     {
@@ -22,7 +11,8 @@ namespace HelloWorld
 
             /*
             //ondan küçük mü 1 den büyük mü?
-              Console.WriteLine("Please enter a number 1-10:");
+          
+            Console.WriteLine("Please enter a number 1-10:");
               var Value = Console.ReadLine();
               Int64.Parse(Value);
               Console.WriteLine(Value);
@@ -74,6 +64,7 @@ namespace HelloWorld
             //Compute the factorial of the number and print it on the console.
             //For example, if the user enters 5, the program should calculate 5 x 4 x 3 x 2 x 1 and
             //display it as 5! = 120
+
             /*
             Console.Write("Enter a number: ");
             var factorial = Convert.ToInt32(Console.ReadLine());
@@ -723,12 +714,12 @@ namespace HelloWorld
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///
 
-
-
-
-
-
-
+            Workflow workflow = new Workflow(new List<IActivity>());
+            workflow.Activities.Add(new Videouploader());
+            workflow.Activities.Add(new DataBase());
+            workflow.Activities.Add(new Webservice());
+            WorkflowEngine.Run(workflow);
+            Console.ReadLine();
 
         }
 
@@ -859,19 +850,29 @@ namespace HelloWorld
             void Execute();
         }
 
-        public class FirstActivity : IActivity
+        public class Videouploader : IActivity
         {
             public void Execute()
             {
-                Console.WriteLine("Starting the activity.1");
+                Console.WriteLine("please 'nsert a v'deo to the app ");
+                Console.WriteLine("uploading video...");
             }
         }
 
-        public class SecondActivity : IActivity
+        public class Webservice : IActivity
         {
             public void Execute()
             {
-                Console.WriteLine("Starting the activity.2");
+                Console.WriteLine("Video Encoding Started...");
+                Console.WriteLine("Videouploading sent to your mail.");
+            }
+        }
+
+        public class DataBase : IActivity
+        {
+            public void Execute()
+            {
+                Console.WriteLine("Process'ng status (uploading)");
             }
         }
         public class Workflow
@@ -887,7 +888,7 @@ namespace HelloWorld
 
         public class WorkflowEngine
         {
-            public void Run(Workflow workflow)
+            public static void Run(Workflow workflow)
             {
                 foreach (var activity in workflow.Activities)
                 {
