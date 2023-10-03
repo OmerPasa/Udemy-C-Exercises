@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Gpt4All;
 
 namespace hello_world
 {
@@ -712,7 +713,8 @@ namespace hello_world
             */
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///
+            /*
+
 
             Workflow workflow = new Workflow(new List<IActivity>());
             workflow.Activities.Add(new Videouploader());
@@ -720,6 +722,27 @@ namespace hello_world
             workflow.Activities.Add(new Webservice());
             WorkflowEngine.Run(workflow);
             Console.ReadLine();
+            */
+
+            // load the model
+            var modelFactory = new ModelFactory();
+
+            using var model = modelFactory.LoadModel("./path/to/ggml-gpt4all-j-v1.3-groovy.bin");
+
+            var input = "Name 3 Colors";
+
+            // request a prediction
+            var result = await model.GetStreamingPredictionAsync(
+                input,
+                PredictRequestOptions.Defaults);
+
+            // asynchronously print the tokens as soon as they are produces by the model
+            await foreach (var token in result.GetPredictionStreamingAsync())
+            {
+                Console.Write(token);
+            }
+
+
 
         }
 
